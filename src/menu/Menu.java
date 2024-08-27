@@ -11,7 +11,7 @@ public class Menu {
     EmployeeDAO employeeDAO;
 
     public Menu() {
-        EmployeeDAO employeeDAO = new EmployeeDAO();
+        employeeDAO = new EmployeeDAO();
     }
 
     public void init() {
@@ -24,7 +24,7 @@ public class Menu {
                     create();
                 break;
                 case 2:
-                    employeeDAO.read();
+                    read();
                 break;
                 case 3:
                     update();
@@ -61,6 +61,7 @@ public class Menu {
     public void create() {
         System.out.print("Inform the id: ");
         int id = input.nextInt();
+        input.nextLine();                     //needed to consume the new line inserted from nextInt
         System.out.print("Inform the name: ");
         String name = input.nextLine();
         System.out.print("Inform the salary: ");
@@ -70,27 +71,31 @@ public class Menu {
         employeeDAO.create(employee);
     }
 
-    public void update() {
-        System.out.print("Inform the id to update: ");
+    public void read() {
+        System.out.print("Inform the id: ");
         int id = input.nextInt();
-        System.out.print("Inform a new name: ");
-        String name = input.nextLine();
-        System.out.print("Inform the new salary: ");
-        double salary = input.nextDouble();
-
-        Employee employee = new Employee(id, name, salary);
-        employeeDAO.update(employee);
+        var emp = employeeDAO.read(id);
+        System.out.println(emp);
     }
 
+    public void update() {
+        System.out.print("Inform the id: ");
+        int id = input.nextInt();
+        input.nextLine();
+        Employee emp = employeeDAO.read(id);
+
+        System.out.print("Inform a new name: ");
+        emp.setName(input.nextLine());
+
+        System.out.print("Inform a new salary $: ");
+        emp.setSalary(input.nextDouble());
+
+        employeeDAO.update(emp);
+    }
+    
     public void delete() {
         System.out.print("Inform the id: ");
         int id = input.nextInt();
-        System.out.print("Inform the name: ");
-        String name = input.nextLine();
-        System.out.print("Inform the salary: ");
-        double salary = input.nextDouble();
-
-        Employee employee = new Employee(id, name, salary);
-        employeeDAO.delete(employee);
+        employeeDAO.delete(id);
     }
 }
