@@ -14,16 +14,28 @@ public class Employee {
         this.salary = salary;
     }
 
-    public String getName() {
-        return name;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
     }
 
     public int getId() {
-        return id;
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public double getSalary() {
-        return salary;
+        return this.salary;
     }
 
     @Override
